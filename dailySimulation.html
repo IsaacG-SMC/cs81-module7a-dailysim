@@ -10,9 +10,49 @@
   <div id="output" style="margin-top: 40px; font-size: 1.5rem;"></div>
 
   <script>
+    /* My activities:
+    * 12am - 2am: Coding
+    * 2am - 3am: Phone time
+    * 3am - 10am: Sleeping
+    * 10am - 11am: Morning routine
+    * 11am - 12pm: Physical exercise
+    * 12pm - 1pm: Phone time
+    * 1pm - 3pm: Online card gaming
+    * 3pm - 4pm: Phone time
+    * 4pm - 5pm: Reading
+    * 5pm - 7pm: Coding
+    * 7pm - 8pm: On a walk
+    * 9pm - 11pm: Playing Umamusume
+    * 10pm - 12am: Drawing
+    *
+    * Timing: 1 irl hour = 2 second -> 24hrs = 48 seconds
+    */
     const output = document.getElementById("output");
-    
-    # ADD CODE HERE
+    const activities = ["Coding", "Coding", "Phone time", "Sleeping",
+        "Sleeping", "Sleeping", "Sleeping", "Sleeping", "Sleeping",
+        "Sleeping", "Morning routine", "Physical exercise", "Phone time",
+        "Online card gaming", "Online card gaming", "Phone time", "Reading",
+        "Coding", "Coding", "Taking a walk", "Playing Umamusume",
+        "Playing Umamusume", "Drawing", "Drawing"];
+    function displayTime(num){
+      let time;
+      if(num > 12){
+        time = "PM";
+      } else {
+        time = "AM";
+      }
+      num %= 12;
+      if(num === 0){
+        num = 12;
+      }
+      return num + ":00 " + time;
+    }
+
+    for(let i = 0; i < activities.length; i++) {
+      setTimeout(() =>{
+              output.textContent = `${displayTime(i)}: ${activities[i]}`
+      }, 2000 * i);
+    }
 
   </script>
 
