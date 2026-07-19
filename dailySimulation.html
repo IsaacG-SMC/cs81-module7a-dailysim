@@ -7,7 +7,7 @@
 <body style="font-family: sans-serif; text-align: center; padding-top: 60px; background-color: #eef;">
 
   <h1>My Simulated Day</h1>
-  <div id="output" style="margin-top: 40px; font-size: 1.5rem;"></div>
+  <div id="output" style="margin-top: 40px; font-size: 1.5rem; "></div>
 
   <script>
     /* My activities:
@@ -25,15 +25,18 @@
     * 9pm - 11pm: Playing Umamusume
     * 10pm - 12am: Drawing
     *
-    * Timing: 1 irl hour = 2 second -> 24hrs = 48 seconds
+    * Timing: 1 irl hour = 2.5 second -> 24hrs = 60 seconds
     */
     const output = document.getElementById("output");
+    const body = document.body;
     const activities = ["Coding", "Coding", "Phone time", "Sleeping",
         "Sleeping", "Sleeping", "Sleeping", "Sleeping", "Sleeping",
         "Sleeping", "Morning routine", "Physical exercise", "Phone time",
         "Online card gaming", "Online card gaming", "Phone time", "Reading",
         "Coding", "Coding", "Taking a walk", "Playing Umamusume",
         "Playing Umamusume", "Drawing", "Drawing"];
+    const colors = ["#015cb2", "#0169cb", "#0177e4", "#0184fe", "#1b90fe",
+    "#349cfe", "#4da9fe", "#67b5fe", "#80c1fe", "#9acefe", "#b3daff", "#cce6ff"];
     function displayTime(num){
       let time;
       if(num > 12){
@@ -47,11 +50,30 @@
       }
       return num + ":00 " + time;
     }
+    // 2/3 chance of an Unexpected Nap
+    const randTime = Math.floor(Math.random() * 21) + 10;
 
     for(let i = 0; i < activities.length; i++) {
-      setTimeout(() =>{
-              output.textContent = `${displayTime(i)}: ${activities[i]}`
-      }, 2000 * i);
+      // Changes text displayed output element
+      if(i !== randTime) {
+        setTimeout(() => {
+          output.textContent = `${displayTime(i)}: ${activities[i]}`;
+          if(i < 12) {
+            body.style.backgroundColor = colors[i];
+          } else {
+            body.style.backgroundColor = colors.at((-i)+11);
+          }
+        }, 2500 * i);
+      } else {
+        setTimeout(() => {
+          output.textContent = `${displayTime(i)}: Unexpected Nap`;
+          if(i < 12) {
+            body.style.backgroundColor = colors[i];
+          } else {
+            body.style.backgroundColor = colors.at((-i)+11);
+          }
+        }, 2500 * i);
+      }
     }
 
   </script>
