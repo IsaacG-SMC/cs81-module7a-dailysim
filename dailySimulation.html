@@ -39,7 +39,7 @@
     "#349cfe", "#4da9fe", "#67b5fe", "#80c1fe", "#9acefe", "#b3daff", "#cce6ff"];
     function displayTime(num){
       let time;
-      if(num > 12){
+      if(num >= 12){
         time = "PM";
       } else {
         time = "AM";
@@ -57,7 +57,8 @@
       // Changes text displayed output element
       if(i !== randTime) {
         setTimeout(() => {
-          output.textContent = `${displayTime(i)}: ${activities[i]}`;
+          let curr = output.innerHTML;
+          output.innerHTML = `${displayTime(i)}: ${activities[i]}<br>` + curr;
           if(i < 12) {
             body.style.backgroundColor = colors[i];
           } else {
@@ -66,7 +67,8 @@
         }, 2500 * i);
       } else {
         setTimeout(() => {
-          output.textContent = `${displayTime(i)}: Unexpected Nap`;
+          let curr = output.innerHTML;
+          output.innerHTML = `${displayTime(i)}: Unexpected Nap<br>` + curr;
           if(i < 12) {
             body.style.backgroundColor = colors[i];
           } else {
